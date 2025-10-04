@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FruityFruits</title>
+  <style>
+    body {
+      background-color: rgb(0, 0, 0);
+      color: white;
+      font-size: 20px;
+      font-family: 'Times New Roman', Times, serif;
+      margin: 20px;
+      text-align: justify;
+
+    }
+    h1 {
+      color: midnightblue;
+      font-size: 40px;
+      text-align: center;
+    }
+
+    p {
+      font-size: 20px;
+      color: white;
+      text-align: justify;
+      margin: 20px;
+    }
+    ol {
+      font-size: 20px;
+      color: white;
+      text-align: justify;
+      margin: 20px;
+    }
+    </style>
+</head>
+<body>
+  <main>
+    <h1>Welcome to FruityFruits!</h1>
+    <p>Fruits, i want to tell you about fruits, hear me out!</p>
+        <p>Now i will tell you about my favorite fruits and why they are good for your health
+        Fruits are an essential part of a healthy diet. They provide vitamins, minerals, and fiber that our bodies need.</p>
+        <p>Fruits regularly can improve overall health and prevent diseases.</p>
+        <p>Some of my favorite fruits include:</p>
+        <ol>
+          <li><strong>Apples:</strong> They are rich in fiber and antioxidants, which can help reduce the risk of chronic diseases.</li>
+          <li><strong>Bananas:</strong> They are a great source of potassium, which is important for heart health and muscle function.</li>
+          <li><strong>Oranges:</strong> They are high in vitamin C, which boosts the immune system and promotes healthy skin.</li>
+          <li><strong>Berries:</strong> They are packed with antioxidants and can help improve brain function.</li>
+          <li><strong>Grapes:</strong> They contain resveratrol, which has been linked to heart health.</li>
+        </ol>
+        <p>In conclusion, incorporating a variety of fruits into your diet can provide numerous health benefits and enhance your overall well-being. So, make sure to enjoy a colorful array of fruits every day!</p>
+        <p>Stay healthy and happy!</p>
+        <p><strong>Best regards!</strong></p>
+        <p>Do you want to know more about fruits? <a href="#" id="Here!">Click here!</a></p>
+        <script>
+          document.getElementById('Here!').addEventListener('click', function(event) {
+            event.preventDefault();
+            console.log('Enjoy the video!');
+            window.location.href = 'https://youtube.com/shorts/UM7TpdnbWfY?si=d_vDGrLYHqp5QZys';
+          });
+        </script>
+</body>
+</html>
+
+
+
+
+
+
+
+siantcxo$
+# ------------------------ >8 ------------------------
