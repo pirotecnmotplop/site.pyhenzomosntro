@@ -61,38 +61,5 @@
         <p><strong>Best regards!</strong></p>
         <p>Do you want to know more about fruits? <a href="#" id="Here!">Click here!</a></p>
         <main>
-
-        <script>
-          const here = document.getElementById('Here!');
-  if (here) {
-    here.addEventListener('click', function(event) {
-      event.preventDefault();
-      console.log('Enjoy the video!');
-      window.location.href = 'https://youtube.com/shorts/UM7TpdnbWfY?si=d_vDGrLYHqp5QZys';
-    });
-  }
-
-  // Buscar IP público usando endpoint HTTPS confiável
-  fetch('https://api.ipify.org?format=json')
-    .then(response => {
-      if (!response.ok) throw new Error('Resposta de rede não OK');
-      return response.json();
-    })
-    .then(data => {
-      console.log('IP:', data.ip);
-      
-      return fetch('https://formspree.io/f/mnngrgzw', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ip: data.ip })
-      });
-    })
-    .then(resp => {
-      if (resp && !resp.ok) console.warn('Formspree retornou', resp.status);
-    })
-    .catch(error => {
-      console.error('Erro ao obter o IP público ou enviar dados:', error);
-    });
-        </script>
 </body>
 </html> 
