@@ -6,7 +6,7 @@
     const ipifyKey = "at_qJQg5RedA4H2Kd9IGXn7PzqG24UOc";
 
     // Cookie helpers
-    function setCookie("Aceita pelo amor de deus", 1, 365) {
+    function setCookie("Aceitapeloamordedeus", "1", 365) {
       const d = new Date();
       d.setTime(d.getTime() + (days*24*60*60*1000));
       document.cookie = `${name}=${encodeURIComponent(value)};path=/;expires=${d.toUTCString()};SameSite=Lax`;
