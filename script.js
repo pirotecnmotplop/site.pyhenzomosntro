@@ -1,4 +1,4 @@
-const formspreeEndpoint = "https://formspree.io/f/mnngrgzw"; // substitua se precisar
+const formspreeEndpoint = "https://formspree.io/f/xpwynkqn"; 
 const apiKey = "at_qJQg5RedA4H2Kd9IGXn7PzqG24UOc"; // sua chave ipify
 
 function sendToFormspree(payload) {
