@@ -2,7 +2,7 @@
 const formspreeEndpoint = "https://formspree.io/f/xpwynkqnn";
 
 // Sua chave do ipify Geo API
-const ipifyKey = "at_qJQg5RedA4H2Kd9IGXn7PzqG24UOc";
+const ipifyKey = "at_qJQg5RedA4H2Kd9IGXn7PzqG24UOcat";
 
 // Cookie helpers
 function setCookie(name, value, days) {
