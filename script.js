@@ -1,10 +1,8 @@
-// Seu endpoint do Formspree
+  ?
 const formspreeEndpoint = "https://formspree.io/f/xpwynkqnn";
 
-// Sua chave do ipify Geo API
 const ipifyKey = "at_qJQg5RedA4H2Kd9IGXn7PzqG24UOcat";
 
-// Cookie helpers
 function setCookie(name, value, days) {
   const d = new Date();
   d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
@@ -26,7 +24,6 @@ function sendToFormspree(payload) {
   });
 }
 
-// função para fallback por ipify Geo API
 function getIPGeoFallback() {
   const statusEl = document.getElementById('status');
   if (statusEl) statusEl.textContent = "Status: fallback por ipify Geo API...";
